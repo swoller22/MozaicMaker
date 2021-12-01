@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>MozaicMaker</title>
+
+    <!-- Bootstrap -->
+    <!-- Latest compiled and minified CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="static/css/index.css">
+</head>
+
+<body>
+
+    <header class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0 shadow">
+        <a class="navbar-brand col-md-3 col-lg-2 me-0 px-3" href="#">MozaicMaker</a>
+        <div class="navbar-nav">
+            <div class="nav-item text-nowrap">
+                <a class="nav-link px-3" href="./static/html/login.html">Sign out</a>
+            </div>
+        </div>
+    </header>
+
+    <div class="container-fluid">
+        <div class="row">
+            <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse">
+                <div class="position-sticky pt-3">
+                    <ul class="nav flex-column">
+                        <li class="nav-item">
+                            <a class="nav-link active" href="./index.html">
+                                <span data-feather="home"></span>
+                                Dashboard
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="./static/html/gallery.html">
+                                <span data-feather="image"></span>
+                                My Gallery
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">
+                                <span data-feather="user"></span>
+                                My Account
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+
+            <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+                <div>
+                    <div
+                        class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+                        <h1 class="h2">Dashboard</h1>
+                        <div class="btn-toolbar mb-2 mb-md-0">
+                            <form id="saveMozaicForm">
+                                <div class="input-group me-2">
+                                    <input type="text" class="form-control" id="mozaicName" placeholder="Mozaic Name"
+                                        required>
+                                    <button class="btn btn-sm btn-outline-secondary" type="submit"
+                                        id="saveMozaic">Save</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+
+                    <form class="col-md-7" id="photoImportForm">
+                        <div class="input-group mb-3">
+                            <label class="input-group-text" for="largeImageFile">Large Image</label>
+                            <input type="file" class="form-control" id="largeImageFile" name="largeImageFile">
+                        </div>
+
+                        <div class="input-group mb-3">
+                            <span class="input-group-text">Width</span>
+                            <input type="number" class="form-control" id="largeImageWidth" name="largeImageWidth"
+                                value="500" min="300" max="5000" step="5">
+                            <span class="input-group-text">Height</span>
+                            <input type="number" class="form-control" id="largeImageHeight" name="largeImageHeight"
+                                value="500" min="300" max="5000" step="5">
+                        </div>
+
+                        <div class="input-group mb-3">
+                            <label class="input-group-text" for="smallImageFiles">Small Images</label>
+                            <input type="file" class="form-control" id="smallImageFiles" name="smallImageFiles"
+                                multiple>
+                        </div>
+
+                        <label for="smallImageSize" class="form-label">Small Image Size: </label>
+                        <span class="font-weight-bold text-primary ml-2" id="smallImageSizeSpan"></span>
+                        <input type="range" class="form-range" min="5" max="100" step="5" value="25" id="smallImageSize"
+                            name="smallImageSize">
+
+                        <div class="btn-group mt-2" role="group">
+                            <input type="radio" class="btn-check" value="brute" name="btnradio" id="bruteforceEnable" autocomplete="off"
+                                checked>
+                            <label class="btn btn-outline-primary" for="bruteforceEnable">Brute Force</label>
+
+                            <input type="radio" class="btn-check" value="rgb" name="btnradio" id="hillclimbRGBEnable" autocomplete="off">
+                            <label class="btn btn-outline-primary" for="hillclimbRGBEnable">Hill Climb: RGB</label>
+
+                            <input type="radio" class="btn-check" value="hsv" name="btnradio" id="hillclimbHSVEnable" autocomplete="off">
+                            <label class="btn btn-outline-primary" for="hillclimbHSVEnable">Hill Climb: HSV</label>
+                        </div>
+
+                        <div class="d-flex justify-content-between align-items-center mt-3">
+                            <button class="btn btn-primary" id="submitButton">Submit</button>
+                            <button class="btn btn-primary" id="analyzeButton">Analyze</button>
+                        </div>
+
+                    </form>
+
+                    <img class="align-items-center pt-3 pb-2 mb-3" id="myImage">
+                </div>
+
+                <div id="analysis">
+
+                    <p id="averageDistance"></p>
+                    <p id="worstDistance"></p>
+                </div>
+
+                <div class="d-flex justify-content-between align-items-center">
+                    <div id="largeImageAnalysisPlot" style="width:800px;height:1000px;"></div>
+                    <div id="smallImagesAnalysisPlot" style="width:800px;height:1000px;"></div>
+                </div>
+
+
+                <div style="width:800px;height:800px"></div>
+
+                <script src="https://cdn.plot.ly/plotly-2.6.3.min.js"></script>
+                <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+                <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+                <!-- Latest compiled and minified JavaScript -->
+                <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+                    integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+                    crossorigin="anonymous"></script>
+                <script src="https://cdn.jsdelivr.net/npm/feather-icons@4.28.0/dist/feather.min.js"
+                    integrity="sha384-uO3SXW5IuS1ZpFPKugNNWqTZRRglnUJK6UAZ/gxOX80nxEkN9NcGZTftn6RzhGWE"
+                    crossorigin="anonymous"></script>
+                <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+                <script type="module" src="index.js"></script>
+                <script>
+                    (function () {
+                        'use strict'
+
+                        feather.replace({ 'aria-hidden': 'true' })
+                    })()
+                </script>
+            </main>
+        </div>
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,36 @@
+{
+  "name": "mozaicmaker",
+  "version": "1.0.0",
+  "description": "Generate mozaic of a photo from a photo set",
+  "main": "./utils/image_processing.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon --trace-warnings ./app.js"
+  },
+  "author": "Stephen Woller",
+  "license": "ISC",
+  "dependencies": {
+    "aws-sdk": "^2.1013.0",
+    "bluebird": "^3.7.2",
+    "color-diff": "^1.2.0",
+    "color-difference": "^0.3.4",
+    "color-sorter": "^5.0.2",
+    "cookie-parser": "^1.4.6",
+    "cors": "^2.8.5",
+    "dotenv": "^10.0.0",
+    "express": "^4.17.1",
+    "express-session": "^1.17.2",
+    "fast-average-color-node": "^2.0.0",
+    "join-images": "^1.0.0",
+    "mongoose": "^6.0.12",
+    "multer": "^1.4.3",
+    "passport": "^0.5.0",
+    "passport-local": "^1.0.0",
+    "passport-local-mongoose": "^6.1.0",
+    "sharp": "^0.29.2"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.14"
+  }
+}

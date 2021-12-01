@@ -12,7 +12,7 @@ import { authentication_router } from './routes/authentication_router.js'
 
 const app = express()
 app.use(expressSession({
-    secret: 'keyboard cat2',
+    secret: 'keyboard cat',
     resave: false,
     saveUninitialized: false
 }));

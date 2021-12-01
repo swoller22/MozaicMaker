@@ -20,6 +20,11 @@ authentication_router.route('/')
         if(req.isAuthenticated()) {res.send({ isAuthenticated: true })}
         else {res.send({isAuthenticated: false})}
     })
+    .delete((req, res) => {
+
+        console.log(req.user.username)
+        res.send(`${req.user.username} has been deleted`)
+    })
 
 authentication_router.route('/register')
     .all((req, res, next) => {

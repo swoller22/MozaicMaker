@@ -5,6 +5,8 @@ import expressSession from 'express-session'
 import passport from 'passport'
 import mongoose from 'mongoose'
 
+import { readFile } from 'fs/promises';
+
 import { image_processing_router } from './routes/image_processing_router.js'
 import { s3_router } from './routes/s3_router.js'
 import { authentication_router } from './routes/authentication_router.js'
@@ -33,7 +35,9 @@ app.use('/image_processing', image_processing_router)
 app.use('/s3', s3_router)
 app.use('/authentication', authentication_router)
 
-app.listen(5000, () => console.log("listening on port 5000"))
+app.listen(process.env.PORT, () => console.log(`listening on port ${process.env.PORT}`))
 
 // Open Mongo connection
-mongoose.connect('mongodb://localhost:27017/')
+const dbConfig = 
+     JSON.parse(await readFile(new URL('./config/mongo_config.json', import.meta.url)))
+mongoose.connect(`mongodb://${dbConfig.host}:${dbConfig.port}/`)

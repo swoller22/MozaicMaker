@@ -3,6 +3,9 @@ import passport from 'passport'
 
 import { AccountModel } from '../models/accounts.js'
 
+import { getImageKeysForAccount, deleteKeysInMongo, deleteAccountFromMongo } from '../utils/mongo_utils.js'
+import { deleteFromS3 } from '../utils/s3_utils.js'
+
 const authentication_router = express.Router()
 
 // passport config
@@ -20,9 +23,12 @@ authentication_router.route('/')
         if(req.isAuthenticated()) {res.send({ isAuthenticated: true })}
         else {res.send({isAuthenticated: false})}
     })
-    .delete((req, res) => {
-
-        console.log(req.user.username)
+    .delete(async (req, res) => {
+        console.log("Deleting account")
+        const imageKeys = await getImageKeysForAccount(req.user.username)
+        let imagesDeleted = await deleteFromS3(imageKeys)
+        let keysDeleted = await deleteKeysInMongo(req.user.username)
+        let accountDeleted = deleteAccountFromMongo(req.user.username)
         res.send(`${req.user.username} has been deleted`)
     })
 

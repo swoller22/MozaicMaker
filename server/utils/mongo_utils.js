@@ -1,4 +1,5 @@
 import { ImageModel } from '../models/images.js'
+import { AccountModel } from '../models/accounts.js'
 
 function storeKeyToMongo(key, username) {
     var newImageKey = new ImageModel()
@@ -19,4 +20,10 @@ async function deleteKeysInMongo(username) {
     return results
 }
 
-export {storeKeyToMongo, getImageKeysForAccount, deleteKeysInMongo}
+async function deleteAccountFromMongo(username) {
+
+    const result = await AccountModel.deleteOne({username: username})
+    return result
+}
+
+export {storeKeyToMongo, getImageKeysForAccount, deleteKeysInMongo, deleteAccountFromMongo}

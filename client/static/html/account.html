@@ -14,6 +14,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.8.2/css/lightbox.min.css">
 
     <link rel="stylesheet" href="../css/index.css">
+    <link rel="stylesheet" href="../css/accounts.css">
 </head>
 
 <body>
@@ -60,10 +61,34 @@
                     <h1 class="h2">My Account</h1>
                     <div class="btn-toolbar mb-2 mb-md-0">
                         <div class="btn-group me-2">
-                            <button type="button" id="deleteAccount" class="btn btn-sm btn-outline-danger">Delete Account</button>
+                            <button type="button" id="deleteAccount" class="btn btn-sm btn-outline-danger">Delete
+                                Account</button>
                         </div>
                     </div>
                 </div>
+
+                <form class="col-md-7" id="passwordChangeForm">
+
+                    <div class="row g-3 align-items-center">
+                        <div class="col-3">
+                            <label for="currentPassword" class="col-form-label">Current Password</label>
+                        </div>
+                        <div class="col-4">
+                            <input type="password" id="currentPassword" class="form-control">
+                        </div>
+                    </div>
+
+                    <div class="row g-3 align-items-center">
+                        <div class="col-3">
+                            <label for="newPassword" class="col-form-label">New Password</label>
+                        </div>
+                        <div class="col-4">
+                            <input type="password" id="newPassword" class="form-control">
+                        </div>
+                    </div>
+
+                    <button class="btn btn-primary" id="changePasswordButton">Change Password</button>
+                </form>
 
                 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
                 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>

@@ -3,7 +3,7 @@ import passport from 'passport'
 
 import { AccountModel } from '../models/accounts.js'
 
-import { getImageKeysForAccount, deleteKeysInMongo, deleteAccountFromMongo } from '../utils/mongo_utils.js'
+import { getImageKeysForAccount, deleteKeysInMongo, deleteAccountFromMongo, changePassword } from '../utils/mongo_utils.js'
 import { deleteFromS3 } from '../utils/s3_utils.js'
 
 const authentication_router = express.Router()
@@ -30,6 +30,13 @@ authentication_router.route('/')
         let keysDeleted = await deleteKeysInMongo(req.user.username)
         let accountDeleted = deleteAccountFromMongo(req.user.username)
         res.send(`${req.user.username} has been deleted`)
+    })
+    .put(async (req, res) => {
+        console.log("Modifying password")
+
+        let passwordChanged = await changePassword(req.user.username, req.body.currentPassword, req.body.newPassword)
+        if (passwordChanged) res.send("Password modified")
+        else res.send("Incorrect password")
     })
 
 authentication_router.route('/register')

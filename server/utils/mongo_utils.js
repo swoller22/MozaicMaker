@@ -26,4 +26,19 @@ async function deleteAccountFromMongo(username) {
     return result
 }
 
-export {storeKeyToMongo, getImageKeysForAccount, deleteKeysInMongo, deleteAccountFromMongo}
+async function changePassword(username, currentPassword, newPassword) {
+
+    const user = await AccountModel.findOne({username: username})
+
+    let success = true
+    try {
+        var passwordChanged = await user.changePassword(currentPassword, newPassword)
+        console.log(passwordChanged)
+    } catch (error) {
+        console.error(error)
+        success = false
+    }
+    return success
+}
+
+export {storeKeyToMongo, getImageKeysForAccount, deleteKeysInMongo, deleteAccountFromMongo, changePassword}

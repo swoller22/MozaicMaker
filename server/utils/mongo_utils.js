@@ -33,7 +33,6 @@ async function changePassword(username, currentPassword, newPassword) {
     let success = true
     try {
         var passwordChanged = await user.changePassword(currentPassword, newPassword)
-        console.log(passwordChanged)
     } catch (error) {
         console.error(error)
         success = false

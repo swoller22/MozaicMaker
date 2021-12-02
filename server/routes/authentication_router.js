@@ -62,11 +62,8 @@ authentication_router.route('/login')
     })
     .post((req, res) => {
 
-        console.log("Attempting login")
         passport.authenticate('local', function (err, user, info) {
-            console.log(user)
             req.login(user, function(err) {
-                console.log(req.user)
                 res.json({success:true})
             })
         })(req, res)

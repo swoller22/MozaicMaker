@@ -21,7 +21,6 @@ const s3 = new AWS.S3()
 
 async function uploadToS3(image, username, mozaicName) {
 
-    console.log('in uploadToS3')
     const base64Data = new Buffer.from(image.replace(/^data:image\/\w+;base64,/, ""), 'base64')
 
     // Getting the file type, ie: jpeg, png or gif

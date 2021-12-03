@@ -64,6 +64,10 @@ authentication_router.route('/login')
 
         passport.authenticate('local', function (err, user, info) {
             req.login(user, function(err) {
+                if (err) {
+                    res.send("Unable to log in")
+                    return
+                }
                 res.json({success:true})
             })
         })(req, res)

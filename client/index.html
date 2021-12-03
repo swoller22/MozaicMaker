@@ -60,11 +60,16 @@
                         <h1 class="h2">Create a Mozaic</h1>
                         <div class="btn-toolbar mb-2 mb-md-0">
                             <form id="saveMozaicForm">
-                                <div class="input-group me-2">
-                                    <input type="text" class="form-control" id="mozaicName" placeholder="Mozaic Name"
-                                        required>
-                                    <button class="btn btn-sm btn-outline-secondary" type="submit"
-                                        id="saveMozaic">Save</button>
+                                <div class="d-flex flex-row-reverse">
+                                    <div class="input-group me-2">
+                                        <input type="text" class="form-control" id="mozaicName" placeholder="Mozaic Name"
+                                            required>
+                                        <button class="btn btn-sm btn-outline-secondary" type="submit"
+                                            id="saveMozaic">Save</button>
+                                    </div>
+                                    <div class="alert alert-danger align-items-center">
+                                        <strong>Error: Image not saved</strong>
+                                    </div>
                                 </div>
                             </form>
                         </div>

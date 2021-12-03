@@ -13,7 +13,7 @@ s3_router.route('/')
     .post(async (req, res, next) => {
 
         let isDuplicate = await checkDuplicate(req.body.mozaicName, req.user.username)
-        if(isDuplicate) {
+        if(isDuplicate || req.body.image.length == 0) {
             res.json({success: false})
             return
         } else {

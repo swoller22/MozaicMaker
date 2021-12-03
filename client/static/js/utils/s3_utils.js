@@ -12,7 +12,13 @@ async function uploadToS3(e) {
         mozaicName: mozaicName
     })
 
-    console.log(result)
+    if(result.data.success == false) {
+        $('#saveMozaicForm .alert').show(500)
+    } else {
+        $('#saveMozaicForm .alert').hide(500)
+    }
+
+    console.log(result.data)
 }
 
 export { uploadToS3 }

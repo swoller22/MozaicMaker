@@ -23,4 +23,5 @@ $('#deleteGallery').click(async() => {
 
     axios.defaults.withCredentials = true
     const result = await axios.delete('http://localhost:5000/s3')
+    location.reload()
 })

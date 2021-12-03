@@ -18,6 +18,7 @@ $(document).ready(() => {
     });
     $("#hillClimberOptions").hide()
     $("#hsvOptions").hide()
+    $(".alert").hide()
 })
 
 /**

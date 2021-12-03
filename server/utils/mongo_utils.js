@@ -20,6 +20,12 @@ async function deleteKeysInMongo(username) {
     return results
 }
 
+async function checkDuplicate(mozaicName, username) {
+
+    const result = await ImageModel.exists({_id: { $regex: `${username}_${mozaicName}.*`}})
+    return result
+}
+
 async function deleteAccountFromMongo(username) {
 
     const result = await AccountModel.deleteOne({username: username})
@@ -40,4 +46,4 @@ async function changePassword(username, currentPassword, newPassword) {
     return success
 }
 
-export {storeKeyToMongo, getImageKeysForAccount, deleteKeysInMongo, deleteAccountFromMongo, changePassword}
+export {storeKeyToMongo, getImageKeysForAccount, deleteKeysInMongo, deleteAccountFromMongo, changePassword, checkDuplicate}

@@ -11,6 +11,7 @@ async function uploadToS3(e) {
         image: image,
         mozaicName: mozaicName
     })
+
     console.log(result)
 }
 

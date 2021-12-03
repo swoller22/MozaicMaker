@@ -77,41 +77,43 @@
                                     <label class="input-group-text" for="largeImageFile">Large Image</label>
                                     <input type="file" class="form-control" id="largeImageFile" name="largeImageFile">
                                 </div>
-    
+
                                 <div class="input-group mb-3">
                                     <span class="input-group-text">Width</span>
-                                    <input type="number" class="form-control" id="largeImageWidth" name="largeImageWidth"
-                                        value="500" min="300" max="5000" step="5">
+                                    <input type="number" class="form-control" id="largeImageWidth"
+                                        name="largeImageWidth" value="500" min="300" max="5000" step="5">
                                     <span class="input-group-text">Height</span>
-                                    <input type="number" class="form-control" id="largeImageHeight" name="largeImageHeight"
-                                        value="500" min="300" max="5000" step="5">
+                                    <input type="number" class="form-control" id="largeImageHeight"
+                                        name="largeImageHeight" value="500" min="300" max="5000" step="5">
                                 </div>
-    
+
                                 <div class="input-group mb-3">
                                     <label class="input-group-text" for="smallImageFiles">Small Images</label>
                                     <input type="file" class="form-control" id="smallImageFiles" name="smallImageFiles"
                                         multiple>
                                 </div>
-    
+
                                 <label for="smallImageSize" class="form-label">Small Image Size: </label>
                                 <span class="font-weight-bold text-primary ml-2" id="smallImageSizeSpan"></span>
                                 <input type="range" class="form-range" min="5" max="100" step="5" value="25"
                                     id="smallImageSize" name="smallImageSize">
-    
+
                                 <div class="btn-group mt-2" role="group">
                                     <input type="radio" class="btn-check" value="brute" name="btnradio"
                                         id="bruteforceEnable" autocomplete="off" checked>
                                     <label class="btn btn-outline-primary" for="bruteforceEnable">Brute Force</label>
-    
+
                                     <input type="radio" class="btn-check" value="rgb" name="btnradio"
                                         id="hillclimbRGBEnable" autocomplete="off">
-                                    <label class="btn btn-outline-primary" for="hillclimbRGBEnable">Hill Climb: RGB</label>
-    
+                                    <label class="btn btn-outline-primary" for="hillclimbRGBEnable">Hill Climb:
+                                        RGB</label>
+
                                     <input type="radio" class="btn-check" value="hsv" name="btnradio"
                                         id="hillclimbHSVEnable" autocomplete="off">
-                                    <label class="btn btn-outline-primary" for="hillclimbHSVEnable">Hill Climb: HSV</label>
+                                    <label class="btn btn-outline-primary" for="hillclimbHSVEnable">Hill Climb:
+                                        HSV</label>
                                 </div>
-    
+
                                 <div class="d-flex justify-content-between align-items-center mt-3">
                                     <button class="btn btn-primary" id="submitButton">Submit</button>
                                     <button class="btn btn-primary" id="analyzeButton">Analyze</button>
@@ -121,8 +123,8 @@
                                 <div class="row">
                                     <div class="input-group mb-3">
                                         <span class="input-group-text">Climb Distance</span>
-                                        <input type="number" class="form-control" id="climbDistance" name="climbDistance"
-                                            value="10" min="1" max="20" step="1">
+                                        <input type="number" class="form-control" id="climbDistance"
+                                            name="climbDistance" value="10" min="1" max="20" step="1">
                                     </div>
                                 </div>
                                 <div id="hsvOptions" class="row">

@@ -20,6 +20,9 @@ $(document).ready(() => {
     $("#hsvOptions").hide()
 })
 
+/**
+ * Dynamic configuration form data
+ */
 $("input[type=radio][name='btnradio']").change(function() {
     if (this.value == "rgb") {
         $("#hillClimberOptions").show(500)

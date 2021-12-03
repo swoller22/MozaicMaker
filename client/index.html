@@ -80,22 +80,22 @@
                             <div class="col-7">
                                 <div class="input-group mb-3">
                                     <label class="input-group-text" for="largeImageFile">Large Image</label>
-                                    <input type="file" class="form-control" id="largeImageFile" name="largeImageFile">
+                                    <input type="file" class="form-control" id="largeImageFile" name="largeImageFile" required>
                                 </div>
 
                                 <div class="input-group mb-3">
                                     <span class="input-group-text">Width</span>
                                     <input type="number" class="form-control" id="largeImageWidth"
-                                        name="largeImageWidth" value="500" min="300" max="5000" step="5">
+                                        name="largeImageWidth" value="500" min="300" max="5000" step="5" required>
                                     <span class="input-group-text">Height</span>
                                     <input type="number" class="form-control" id="largeImageHeight"
-                                        name="largeImageHeight" value="500" min="300" max="5000" step="5">
+                                        name="largeImageHeight" value="500" min="300" max="5000" step="5" required>
                                 </div>
 
                                 <div class="input-group mb-3">
                                     <label class="input-group-text" for="smallImageFiles">Small Images</label>
                                     <input type="file" class="form-control" id="smallImageFiles" name="smallImageFiles"
-                                        multiple>
+                                        multiple required>
                                 </div>
 
                                 <label for="smallImageSize" class="form-label">Small Image Size: </label>

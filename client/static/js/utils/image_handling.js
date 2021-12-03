@@ -4,6 +4,17 @@ async function processAndDisplayMozaic(e) {
 
     let smallImageFiles = $("#smallImageFiles").prop('files')
     let largeImageFile = $("#largeImageFile").prop('files')[0]
+    let largeImageWidth = $("#largeImageWidth").val()
+    let largeImageHeight = $("#largeImageHeight").val()
+
+    // Do nothing if the input information is invalid
+    if ( smallImageFiles.length == 0 ||
+         largeImageFile == undefined ||
+         largeImageWidth == "" ||
+         largeImageHeight == "") {
+        
+        return
+    }
 
     let formData = new FormData()
 
@@ -13,8 +24,8 @@ async function processAndDisplayMozaic(e) {
         formData.append('smallImageFiles', smallImageFile)
     })
 
-    formData.append('largeImageWidth', $("#largeImageWidth").val())
-    formData.append('largeImageHeight', $("#largeImageHeight").val())
+    formData.append('largeImageWidth', largeImageWidth)
+    formData.append('largeImageHeight', largeImageHeight)
     formData.append('smallImageSize', $("#smallImageSize").val())
 
     let algorithm = $("input[name='btnradio']:checked", '#photoImportForm').val()

@@ -10,6 +10,7 @@ async function findBestMatchesByHillClimbing(largeImageBuffer, smallImageBuffers
     let largeImageWidth = configs.largeImageWidth
     let largeImageHeight = configs.largeImageHeight
     let smallImageSize = configs.smallImageSize
+    let climbDistance = configs.climbDistance
 
     let resizedLargeImage = await sharp(largeImageBuffer)
         .resize({ width: largeImageWidth, height: largeImageHeight })
@@ -73,7 +74,7 @@ async function findBestMatchesByHillClimbing(largeImageBuffer, smallImageBuffers
     for (let row = 0; row < numberOfRows; row++) {
         for (let col = 0; col < numberOfCols; col++) {
             let blockAverage = await extractRGBAverage(resizedLargeImage, col * smallImageSize, row * smallImageSize, smallImageSize)
-            let bestMatch = findBestMatchOfAll(blockAverage, arrayOfSortedArrays)
+            let bestMatch = findBestMatchOfAll(blockAverage, arrayOfSortedArrays, climbDistance)
             distances.push(bestMatch.closestDistance)
             console.log(`${row},${col} match found`)
             bestMatches.push(bestMatch.data[bestMatch.indexOfBest].smallImageBuffer)
@@ -97,13 +98,13 @@ async function findBestMatchesByHillClimbing(largeImageBuffer, smallImageBuffers
     }
 }
 
-function findBestMatchOfAll(blockAverage, arrayOfSortedArrays) {
+function findBestMatchOfAll(blockAverage, arrayOfSortedArrays, climbDistance) {
 
     let bestHillClimberDistance = 101
     let bestHillClimber = null
     for (const sortedArray of arrayOfSortedArrays) {
         
-        let hillClimber = findBestMatch(blockAverage, sortedArray)
+        let hillClimber = findBestMatch(blockAverage, sortedArray, climbDistance)
         if ( hillClimber.closestDistance < bestHillClimberDistance ) {
 
             bestHillClimber = hillClimber
@@ -115,7 +116,7 @@ function findBestMatchOfAll(blockAverage, arrayOfSortedArrays) {
     return bestHillClimber
 }
 
-function findBestMatch(blockAverage, resizedImagesToGenerateFromRGBs) {
+function findBestMatch(blockAverage, resizedImagesToGenerateFromRGBs, climbDistance) {
 
     /**
      * Third, set 6 seeds, one in each of the sorted arrays at their midpoints(?), and hill climb
@@ -135,7 +136,7 @@ function findBestMatch(blockAverage, resizedImagesToGenerateFromRGBs) {
 
     let hillClimber = generateHillClimber(resizedImagesToGenerateFromRGBs, startIndex)
 
-    for (var i = 0; i < 10; i++) {
+    for (var i = 0; i < climbDistance; i++) {
 
         var rightDistance = 101
         var leftDistance = 101
@@ -151,12 +152,12 @@ function findBestMatch(blockAverage, resizedImagesToGenerateFromRGBs) {
         if ((rightDistance <= hillClimber.closestDistance) && (rightDistance < leftDistance)) {
             hillClimber.indexOfBest = hillClimber.indexOfBest + 1
             hillClimber.closestDistance = rightDistance
-            //console.log(`Climbing right for a distance of ${hillClimber.closestDistance} with image ${hillClimber.data[hillClimber.indexOfBest].hex}`)
+            console.log(`Climbing right for a distance of ${hillClimber.closestDistance} with image ${hillClimber.data[hillClimber.indexOfBest].hex}`)
         }
         if (leftDistance <= hillClimber.closestDistance) {
             hillClimber.indexOfBest = hillClimber.indexOfBest - 1
             hillClimber.closestDistance = leftDistance
-            //console.log(`Climbing left for a distance of ${hillClimber.closestDistance} with image ${hillClimber.data[hillClimber.indexOfBest].hex}`)
+            console.log(`Climbing left for a distance of ${hillClimber.closestDistance} with image ${hillClimber.data[hillClimber.indexOfBest].hex}`)
         }
     }
 

@@ -16,8 +16,23 @@ $(document).ready(() => {
 
         valueSpan.html(value.val());
     });
+    $("#hillClimberOptions").hide()
+    $("#hsvOptions").hide()
 })
 
+$("input[type=radio][name='btnradio']").change(function() {
+    if (this.value == "rgb") {
+        $("#hillClimberOptions").show(500)
+        $("#hsvOptions").hide(500)
+    } else if (this.value == "hsv") {
+        $("#hillClimberOptions").show(500)
+        $("#hsvOptions").show(500)
+    } else if (this.value == "brute") {
+        $("#hillClimberOptions").hide(100)
+    }
+})
+
+// Use external functions for server-dependent features
 $('#submitButton').click(processAndDisplayMozaic)
 $('#analyzeButton').click(getImageData)
 $('#saveMozaicForm').on('submit', uploadToS3)

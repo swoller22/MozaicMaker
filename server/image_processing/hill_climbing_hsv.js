@@ -11,6 +11,8 @@ async function findBestMatchesByHillClimbing(largeImageBuffer, smallImageBuffers
     let largeImageWidth = configs.largeImageWidth
     let largeImageHeight = configs.largeImageHeight
     let smallImageSize = configs.smallImageSize
+    let climbDistance = configs.climbDistance
+    let numberOfClimbers = configs.numberOfClimbers
 
     let resizedLargeImage = await sharp(largeImageBuffer)
         .resize({ width: largeImageWidth, height: largeImageHeight })
@@ -61,7 +63,7 @@ async function findBestMatchesByHillClimbing(largeImageBuffer, smallImageBuffers
     for (let row = 0; row < numberOfRows; row++) {
         for (let col = 0; col < numberOfCols; col++) {
             let blockAverage = await extractRGBAverage(resizedLargeImage, col * smallImageSize, row * smallImageSize, smallImageSize)
-            let bestMatch = findBestMatch(blockAverage, smallImageHexs)
+            let bestMatch = findBestMatch(blockAverage, smallImageHexs, climbDistance, numberOfClimbers)
             distances.push(bestMatch.closestDistance)
             console.log(`${row},${col} match found match with distance ${bestMatch.closestDistance} with:
              name: ${bestMatch.name}
@@ -89,20 +91,17 @@ async function findBestMatchesByHillClimbing(largeImageBuffer, smallImageBuffers
     
 }
 
-function findBestMatch(blockAverage, smallImageHexs) {
+function findBestMatch(blockAverage, smallImageHexs, climbDistance, numberOfClimbers) {
 
-    /**
-     * Third, set 6 seeds, one in each of the sorted arrays at their midpoints(?), and hill climb
-     * 10(?) times to find a good match
-     */
-    let startIndex0 = 0
-    let startIndex1 = Math.floor(smallImageHexs.length/5)
-    let startIndex2 = Math.floor(2*smallImageHexs.length/5)
-    let startIndex3 = Math.floor(3*smallImageHexs.length/5)
-    let startIndex4 = Math.floor(4*smallImageHexs.length/5)
-    let startIndex5 = smallImageHexs.length - 1
+    // Evenly spread the start indeces of each hill climber
+    let startIndeces = []
+    for ( let i = 0 ; i < numberOfClimbers ; i++ ) {
 
-    function generateHillClimber(name, sortedData, startIndex) {
+        startIndeces.push(Math.floor(i*(smallImageHexs.length-1)/(numberOfClimbers-1)))
+        console.log(startIndeces[i])
+    }
+
+    function generateHillClimber(name, sortedData, startIndex, climbDistance) {
 
         let distance = cd.compare(blockAverage.hex, sortedData[startIndex])
         return {
@@ -111,7 +110,7 @@ function findBestMatch(blockAverage, smallImageHexs) {
             indexOfBest: startIndex,
             closestDistance: distance,
             climb: function() {
-                for (var i = 0; i < 10; i++) {
+                for (var i = 0; i < climbDistance; i++) {
 
                     var rightDistance = 101
                     var leftDistance = 101
@@ -140,20 +139,15 @@ function findBestMatch(blockAverage, smallImageHexs) {
         }
     }
 
-    let hillClimber0 = generateHillClimber('Climber 1', smallImageHexs, startIndex0)
-    let hillClimber1 = generateHillClimber('Climber 2', smallImageHexs, startIndex1)
-    let hillClimber2 = generateHillClimber('Climber 3', smallImageHexs, startIndex2)
-    let hillClimber3 = generateHillClimber('Climber 4', smallImageHexs, startIndex3)
-    let hillClimber4 = generateHillClimber('Climber 5', smallImageHexs, startIndex4)
-    let hillClimber5 = generateHillClimber('Climber 6', smallImageHexs, startIndex5)
+    let hillClimbers = []
+    for ( let i = 0 ; i < numberOfClimbers ; i++ ) {
+        hillClimbers.push(generateHillClimber(`Climber ${i}`, smallImageHexs, startIndeces[i], climbDistance))
+    }
 
-
-    hillClimber0.climb()
-    hillClimber1.climb()
-    hillClimber2.climb()
-    hillClimber3.climb()
-
-    let hillClimbers = [hillClimber0, hillClimber1, hillClimber2, hillClimber3, hillClimber4, hillClimber5]
+    hillClimbers.forEach(hillClimber => {
+        console.log(`Hill ${hillClimber.name} is climbing from index ${hillClimber.indexOfBest}`)
+        hillClimber.climb()
+    });
 
     let bestHillClimber = null
     let bestDistance = 101

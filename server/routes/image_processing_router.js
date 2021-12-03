@@ -39,12 +39,18 @@ image_processing_router.route('/')
                     configs)
                 break
             case 'rgb':
+                configs.climbDistance = parseInt(req.body.climbDistance)
+                    
                 result = await findBestMatchesByHillClimbingRGB(
                     largeImageBuffer,
                     smallImageBuffers,
                     configs)
                 break
             case 'hsv':
+
+                configs.climbDistance = parseInt(req.body.climbDistance)
+                configs.numberOfClimbers = parseInt(req.body.numberOfClimbers)
+
                 result = await findBestMatchesByHillClimbingHSV(
                     largeImageBuffer,
                     smallImageBuffers,

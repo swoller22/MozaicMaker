@@ -16,7 +16,17 @@ async function processAndDisplayMozaic(e) {
     formData.append('largeImageWidth', $("#largeImageWidth").val())
     formData.append('largeImageHeight', $("#largeImageHeight").val())
     formData.append('smallImageSize', $("#smallImageSize").val())
-    formData.append('algorithm', $("input[name='btnradio']:checked", '#photoImportForm').val())
+
+    let algorithm = $("input[name='btnradio']:checked", '#photoImportForm').val()
+    formData.append('algorithm', algorithm)
+
+    if (algorithm == "rgb" || algorithm == "hsv") {
+        formData.append('climbDistance', $('#climbDistance').val())
+    }
+
+    if (algorithm == "hsv" ) {
+        formData.append('numberOfClimbers', $('#nClimbers').val())
+    }
 
     const result = await axios.post('http://localhost:5000/image_processing', formData, {
         headers: {

@@ -1,3 +1,8 @@
+$(document).ready(() => {
+
+    $(".alert").hide()
+})
+
 $('#register-form').on('submit', async (e) => {
     e.preventDefault()
 
@@ -14,5 +19,7 @@ $('#register-form').on('submit', async (e) => {
 
     if (result.data.success) {
         window.location.assign('./login.html')
+    } else {
+        $(".alert").show(500)
     }
 })

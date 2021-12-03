@@ -49,7 +49,7 @@ authentication_router.route('/register')
         AccountModel.register(new AccountModel({ username: req.body.username }), req.body.password, function (err, account) {
             if (err) {
 
-                return res.send("Error, cannot register")
+                return res.json({success: false})
             }
             res.send({ success: true })
         })

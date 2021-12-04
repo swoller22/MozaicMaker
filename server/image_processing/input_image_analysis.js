@@ -3,6 +3,18 @@ import { extractRGBAverage, resizeImages } from '../utils/image_processing.js'
 import { getAverageColor } from 'fast-average-color-node'
 import colorSort from 'color-sorter'
 
+/**
+ * Gather the necessary information to perform analysis on the input selection:
+ *  1. Small image RGB average set
+ *  2. Block average RGB set
+ *  3. Small image RGB average set sorted by HSV
+ *  4. Small image RGB average set sorted by RGB, RBG, GRB, GBR, BRG, BGR
+ * 
+ * @param {*} largeImageBuffer  Large image buffer
+ * @param {*} smallImageBuffers Small image buffers
+ * @param {*} configs           Configurations
+ * @returns                     Block average set, small image average set, and sorted data
+ */
 async function getImageData(largeImageBuffer, smallImageBuffers, configs) {
 
     let largeImageWidth = configs.largeImageWidth

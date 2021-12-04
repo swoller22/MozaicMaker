@@ -1,6 +1,6 @@
 import express from 'express'
 import multer from 'multer'
-import { findBestMatchesByBruteForce } from '../image_processing/brute_force.js'
+import { createMozaic as createMozaicWithBruteForce } from '../image_processing/brute_force.js'
 import { findBestMatchesByHillClimbing as findBestMatchesByHillClimbingHSV } from '../image_processing/hill_climbing_hsv.js'
 import { findBestMatchesByHillClimbing as findBestMatchesByHillClimbingRGB } from '../image_processing/hill_climbing_rgb.js'
 import { getImageData } from '../image_processing/input_image_analysis.js'
@@ -33,7 +33,7 @@ image_processing_router.route('/')
         var result = null
         switch (req.body.algorithm) {
             case 'brute':
-                result = await findBestMatchesByBruteForce(
+                result = await createMozaicWithBruteForce(
                     largeImageBuffer,
                     smallImageBuffers,
                     configs)

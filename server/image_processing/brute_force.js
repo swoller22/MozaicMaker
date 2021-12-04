@@ -5,7 +5,15 @@ import { extractRGBAverage, resizeImages, compileImageRows } from '../utils/imag
 import { getAverageColor } from 'fast-average-color-node'
 import { myMathHelper } from '../utils/math_utils.js'
 
-async function findBestMatchesByBruteForce(largeImageBuffer, smallImageBuffers, configs) {
+/**
+ * Create mozaic using the Brute Force algorithm
+ * 
+ * @param {*} largeImageBuffer      Image data buffer for the large image
+ * @param {*} smallImageBuffers     Image data buffers for the smaller images
+ * @param {*} configs               Configuration data
+ * @returns                         Mozaic image data buffer
+ */
+async function createMozaic(largeImageBuffer, smallImageBuffers, configs) {
 
     let largeImageWidth = configs.largeImageWidth
     let largeImageHeight = configs.largeImageHeight
@@ -15,11 +23,18 @@ async function findBestMatchesByBruteForce(largeImageBuffer, smallImageBuffers, 
         .resize({ width: largeImageWidth, height: largeImageHeight })
         .toBuffer()
 
+    // Resize the small images to fit inside of the large image blocks
     let resizedImagesToGenerateFrom = await resizeImages(smallImageBuffers, smallImageSize)
 
     let numberOfRows = Math.floor(largeImageHeight / smallImageSize)
     let numberOfCols = Math.floor(largeImageWidth / smallImageSize)
 
+    /**
+     * Loop through each block of the large image and:
+     *  1. Compute the average RGB value of that block
+     *  2. Find the small image with the lowest color distance to that block
+     *  3. Add that small images data to the set of best matches and save the distance
+     */
     var bestMatches = []
     var distances = []
     for (let row = 0; row < numberOfRows; row++) {
@@ -34,12 +49,17 @@ async function findBestMatchesByBruteForce(largeImageBuffer, smallImageBuffers, 
         }
     }
 
+    /**
+     * Save information about the mozaic
+     */
     let matchInfo = {
         averageDistance: myMathHelper.getAverage(distances),
         worstDistance: myMathHelper.getWorstMatchDistance(distances)
     }
 
-    // Now join the images
+    /**
+     * Join the images in each row of the mozaic, then join the rows to create the final mozaic
+     */
     let rowsOfImages = await compileImageRows(bestMatches, numberOfRows, numberOfCols)
     try {
         let out = await joinImages(rowsOfImages, { 'direction': 'vertical' })
@@ -50,6 +70,14 @@ async function findBestMatchesByBruteForce(largeImageBuffer, smallImageBuffers, 
     }
 }
 
+/**
+ * Find the lowest color distance between the image set and the
+ * toMatch hex value
+ * 
+ * @param {*} toMatch   Hex value to find best match for
+ * @param {*} images    Image set to use for best match search
+ * @returns             Best match image and the associated distance
+ */
 async function findBestMatch(toMatch, images) {
 
     let bestMatchVal = 101;
@@ -67,4 +95,4 @@ async function findBestMatch(toMatch, images) {
     return {bestMatch, bestMatchVal}
 }
 
-export { findBestMatchesByBruteForce }
+export { createMozaic }

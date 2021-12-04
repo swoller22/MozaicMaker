@@ -1,7 +1,7 @@
 import express from 'express'
 import multer from 'multer'
 import { createMozaic as createMozaicWithBruteForce } from '../image_processing/brute_force.js'
-import { findBestMatchesByHillClimbing as findBestMatchesByHillClimbingHSV } from '../image_processing/hill_climbing_hsv.js'
+import { createMozaic as createMozaicByHillClimbingHSV } from '../image_processing/hill_climbing_hsv.js'
 import { createMozaic as createMozaicByHillClimbingRGB } from '../image_processing/hill_climbing_rgb.js'
 import { getImageData } from '../image_processing/input_image_analysis.js'
 
@@ -51,7 +51,7 @@ image_processing_router.route('/')
                 configs.climbDistance = parseInt(req.body.climbDistance)
                 configs.numberOfClimbers = parseInt(req.body.numberOfClimbers)
 
-                result = await findBestMatchesByHillClimbingHSV(
+                result = await createMozaicByHillClimbingHSV(
                     largeImageBuffer,
                     smallImageBuffers,
                     configs)

@@ -2,7 +2,7 @@ import express from 'express'
 import multer from 'multer'
 import { createMozaic as createMozaicWithBruteForce } from '../image_processing/brute_force.js'
 import { findBestMatchesByHillClimbing as findBestMatchesByHillClimbingHSV } from '../image_processing/hill_climbing_hsv.js'
-import { findBestMatchesByHillClimbing as findBestMatchesByHillClimbingRGB } from '../image_processing/hill_climbing_rgb.js'
+import { createMozaic as createMozaicByHillClimbingRGB } from '../image_processing/hill_climbing_rgb.js'
 import { getImageData } from '../image_processing/input_image_analysis.js'
 
 const upload = multer()
@@ -41,7 +41,7 @@ image_processing_router.route('/')
             case 'rgb':
                 configs.climbDistance = parseInt(req.body.climbDistance)
                     
-                result = await findBestMatchesByHillClimbingRGB(
+                result = await createMozaicByHillClimbingRGB(
                     largeImageBuffer,
                     smallImageBuffers,
                     configs)

@@ -8,10 +8,10 @@ import { myMathHelper } from '../utils/math_utils.js'
 /**
  * Create mozaic using the Brute Force algorithm
  * 
- * @param {*} largeImageBuffer      Image data buffer for the large image
- * @param {*} smallImageBuffers     Image data buffers for the smaller images
- * @param {*} configs               Configuration data
- * @returns                         Mozaic image data buffer
+ * @param largeImageBuffer      Image data buffer for the large image
+ * @param smallImageBuffers     Image data buffers for the smaller images
+ * @param configs               Configuration data
+ * @returns                     Mozaic image data buffer
  */
 async function createMozaic(largeImageBuffer, smallImageBuffers, configs) {
 
@@ -74,9 +74,9 @@ async function createMozaic(largeImageBuffer, smallImageBuffers, configs) {
  * Find the lowest color distance between the image set and the
  * toMatch hex value
  * 
- * @param {*} toMatch   Hex value to find best match for
- * @param {*} images    Image set to use for best match search
- * @returns             Best match image and the associated distance
+ * @param toMatch   Hex value to find best match for
+ * @param images    Image set to use for best match search
+ * @returns         Best match image and the associated distance
  */
 async function findBestMatch(toMatch, images) {
 

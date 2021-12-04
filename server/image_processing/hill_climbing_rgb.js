@@ -5,7 +5,24 @@ import { extractRGBAverage, resizeImages, compileImageRows } from '../utils/imag
 import { getAverageColor } from 'fast-average-color-node'
 import { myMathHelper } from '../utils/math_utils.js'
 
-async function findBestMatchesByHillClimbing(largeImageBuffer, smallImageBuffers, configs) {
+/**
+ * Create mozaic using a special variation of the Hill Climbing algorithm as follows:
+ *  1. Sort the input small image set by RGB, RBG, GBR, GRB, BRG, BGR to create 6 "hills"
+ *  2. Create 6 hill climbers, starting at the center of each hill
+ *  3. Have each hill climber climb based on the color distance found at their neighboring points on the hill
+ *  4. Compare the hill climbers color distances, select the minimum as the match for that large image block
+ * 
+ * Possible future additions:
+ *  1. Use random-restart search on all 6 hills with a color-distance heuristic
+ *      Pros: Generally better matches
+ *      Cons: Possible no match, speed benefits drastically reduced 
+ * 
+ * @param largeImageBuffer      Image data buffer for the large image
+ * @param smallImageBuffers     Image data buffers for the smaller images
+ * @param configs               Configuration data
+ * @returns                     Mozaic image data buffer
+ */
+async function createMozaic(largeImageBuffer, smallImageBuffers, configs) {
 
     let largeImageWidth = configs.largeImageWidth
     let largeImageHeight = configs.largeImageHeight
@@ -21,7 +38,9 @@ async function findBestMatchesByHillClimbing(largeImageBuffer, smallImageBuffers
     let numberOfRows = Math.floor(largeImageHeight / smallImageSize)
     let numberOfCols = Math.floor(largeImageWidth / smallImageSize)
 
-    //First, create an object to store the Buffer along with it's RGB value
+    /**
+     * Create an array of average RGB values from the input image set
+     */
     let smallImageRGBs = []
     for (const smallImage of resizedImagesToGenerateFrom) {
         let rgb = await getAverageColor(smallImage.data)
@@ -37,7 +56,7 @@ async function findBestMatchesByHillClimbing(largeImageBuffer, smallImageBuffers
     }
 
     /**
-     * Second, sort the images 6 ways:
+     * Next, sort the images 6 ways:
      * RGB
      * RBG
      * GBR
@@ -45,14 +64,12 @@ async function findBestMatchesByHillClimbing(largeImageBuffer, smallImageBuffers
      * BGR
      * BRG
     */
-
     let rgbSorted = [...smallImageRGBs]
     let rbgSorted = [...smallImageRGBs]
     let gbrSorted = [...smallImageRGBs]
     let grbSorted = [...smallImageRGBs]
     let brgSorted = [...smallImageRGBs]
     let bgrSorted = [...smallImageRGBs]
-
     rgbSorted.sort((a, b) => (a.r - b.r) || (a.g - b.g) || (a.b - b.b))
     rbgSorted.sort((a, b) => (a.r - b.r) || (a.b - b.b) || (a.g - b.g))
     gbrSorted.sort((a, b) => (a.g - b.g) || (a.b - b.b) || (a.r - b.r))
@@ -69,6 +86,12 @@ async function findBestMatchesByHillClimbing(largeImageBuffer, smallImageBuffers
         bgrSorted
     ]
 
+    /**
+     * Loop through each block of the large image and:
+     *  1. Compute the average RGB value of that block
+     *  2. Find the hill climber that had the best match to that block
+     *  3. Add that small images data to the set of best matches and save the distance
+     */
     var distances = []
     var bestMatches = []
     for (let row = 0; row < numberOfRows; row++) {
@@ -81,14 +104,18 @@ async function findBestMatchesByHillClimbing(largeImageBuffer, smallImageBuffers
         }
     }
 
+    /**
+     * Save information about the mozaic
+     */
     let matchInfo = {
         averageDistance: myMathHelper.getAverage(distances),
         worstDistance: myMathHelper.getWorstMatchDistance(distances)
     }
 
-    // Now join the images
+    /**
+     * Join the images in each row of the mozaic, then join the rows to create the final mozaic
+     */
     let rowsOfImages = await compileImageRows(bestMatches, numberOfRows, numberOfCols)   
-    
     try {
         let out = await joinImages(rowsOfImages, { 'direction': 'vertical' })
         let buffer = await out.png().toBuffer({resolveWithObject: true})
@@ -98,6 +125,16 @@ async function findBestMatchesByHillClimbing(largeImageBuffer, smallImageBuffers
     }
 }
 
+/**
+ * Find the best match over all hill climbers by:
+ *  1. Have each hill climber find their best match
+ *  2. Track which hill climber has the minimum best match as the winner
+ * 
+ * @param   blockAverage            Block average HEX value
+ * @param   arrayOfSortedArrays     Array of hills to climb
+ * @param   climbDistance           Maximum distance any climber can go
+ * @returns                         Hill climber with the best match
+ */
 function findBestMatchOfAll(blockAverage, arrayOfSortedArrays, climbDistance) {
 
     let bestHillClimberDistance = 101
@@ -112,18 +149,32 @@ function findBestMatchOfAll(blockAverage, arrayOfSortedArrays, climbDistance) {
         }
     }
 
-    //return bestHillClimber.data[bestHillClimber.indexOfBest]
     return bestHillClimber
 }
 
+/**
+ * Using the hill climbing algorithm, find the best match starting at the center point
+ * of the hill
+ * 
+ * @param  blockAverage                      HEX value to match against 
+ * @param  resizedImagesToGenerateFromRGBs   Array of RGB value hills to climb
+ * @param  climbDistance                     Maximum distance to climb
+ * @returns                                     The hill climber
+ */
 function findBestMatch(blockAverage, resizedImagesToGenerateFromRGBs, climbDistance) {
 
     /**
-     * Third, set 6 seeds, one in each of the sorted arrays at their midpoints(?), and hill climb
-     * 10(?) times to find a good match
+     * We start the hill climber at the center of the hill
      */
     let startIndex = Math.floor(resizedImagesToGenerateFromRGBs.length/2)
 
+    /**
+     * Helper function for generating our hill climber
+     * 
+     * @param   sortedData  The hill  
+     * @param   startIndex  Starting index on the hill
+     * @returns             Hill climber object  
+     */ 
     function generateHillClimber(sortedData, startIndex) {
 
         let distance = cd.compare(blockAverage.hex, sortedData[startIndex].hex)
@@ -136,6 +187,9 @@ function findBestMatch(blockAverage, resizedImagesToGenerateFromRGBs, climbDista
 
     let hillClimber = generateHillClimber(resizedImagesToGenerateFromRGBs, startIndex)
 
+    /**
+     * Unoptimized loop that will climb a maximum of climbDistance to a local minimum
+     */
     for (var i = 0; i < climbDistance; i++) {
 
         var rightDistance = 101
@@ -149,11 +203,13 @@ function findBestMatch(blockAverage, resizedImagesToGenerateFromRGBs, climbDista
             var leftDistance = cd.compare(blockAverage.hex, hillClimber.data[hillClimber.indexOfBest - 1].hex)
         }
 
+        // If the point to the right is a better match, climb right
         if ((rightDistance <= hillClimber.closestDistance) && (rightDistance < leftDistance)) {
             hillClimber.indexOfBest = hillClimber.indexOfBest + 1
             hillClimber.closestDistance = rightDistance
             console.log(`Climbing right for a distance of ${hillClimber.closestDistance} with image ${hillClimber.data[hillClimber.indexOfBest].hex}`)
         }
+        // If the point to the left is a better match, climb left
         if (leftDistance <= hillClimber.closestDistance) {
             hillClimber.indexOfBest = hillClimber.indexOfBest - 1
             hillClimber.closestDistance = leftDistance
@@ -164,4 +220,4 @@ function findBestMatch(blockAverage, resizedImagesToGenerateFromRGBs, climbDista
     return hillClimber
 }
 
-export { findBestMatchesByHillClimbing }
+export { createMozaic }

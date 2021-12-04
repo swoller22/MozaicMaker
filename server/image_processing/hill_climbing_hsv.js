@@ -34,15 +34,6 @@ async function findBestMatchesByHillClimbing(largeImageBuffer, smallImageBuffers
         smallImageHexsUnsorted.push(rgb.hex)
     }
 
-    /**
-     * Second, sort the images 6 ways:
-     * RGB
-     * RBG
-     * GBR
-     * GRB
-     * BGR
-     * BRG
-    */
     smallImageHexs.sort(colorSort.sortFn)
 /*
     for (const hex of smallImageHexs) {

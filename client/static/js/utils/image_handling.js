@@ -156,6 +156,7 @@ async function getImageData(e) {
   let smallImageData = [smallImageTrace]
   let largeImageData = [largeImageTrace]
   var layout = {
+    title: "Hello",
     scene: {
       xaxis: { title: 'R', range },
       yaxis: { title: 'G', range },
@@ -170,6 +171,8 @@ async function getImageData(e) {
   }
   Plotly.newPlot('smallImagesAnalysisPlot', smallImageData, layout);
   Plotly.newPlot('largeImageAnalysisPlot', largeImageData, layout);
+  $('#colorspacePlotContainer > div').css("border", "2px solid black")
+  $('#colorspacePlotContainer h6').css("display", "block")
 
   // Plot the sorted data
   var hsvTrace = {
@@ -254,7 +257,7 @@ async function getImageData(e) {
     }
   };
 
-  Plotly.newPlot('myDiv', data, layout);
+  Plotly.newPlot('sortedColorSpace', data, layout);
 }
 
 export { processAndDisplayMozaic, getImageData }

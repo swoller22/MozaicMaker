@@ -26,7 +26,7 @@ async function extractRGBAverage(buffer, leftStart, topStart, squareSize) {
  * 
  * @param imageBuffers 
  * @param squareSize 
- * @returns                 Array of resized images
+ * @returns             Array of resized images
  */
 async function resizeImages(imageBuffers, squareSize) {
 

@@ -20,6 +20,8 @@ The point of variation across the 3 algorithms is step 2, searching for the best
 
 The Brute Force Search algorithm searches the entire input image set to find the minimum color distance. While this will always find the optimal solution, the time complexity is prohibitive as the number of blocks and input image set size increases. The algorithm runs in *O*(*r*_c_*n*) time where *r* is the number of rows of blocks, *c* is the number of columns of blocks, and *n* is the input image set size.
 
+![Brute Force Results](./assets/Brute_Force_Results.JPG)
+
 To address the time complexity concerns, 2 new algorithms were investigated and generated: Hill Climbing over an RGB-Sorted Colorspace and Hill Climbing over an HSV-Sorted Colorspace. These algorithms both run in *O*(*r*_c_) time, due to restrictions on the search space as will be soon covered.
 
 ### Hill Climbing over an RGB-Sorted Colorspace
@@ -35,6 +37,10 @@ However, using this approach yields a landscape with many ridges. This should be
 To increase the state-space landscape and probability for a meaningful and reasonable match, this algorithm was extended to not only sort on R then G then B but all 6 combinations of the components (RGB, RBG, GRB, GBR, BRG, BGR). A climber is positioned at the center of each landscape and attempts to climb to a best match. These 6 climbers results are then compared to find the absolute best match found and that result is used. The resulting mozaics of this enhancement were better than the single landscape and climber approach. This improvement was likely due to this algorithms ability to search 6 spaces so even though each space is non-optimal for climbing it was less likely to be placed in a ridge, or in the worst (and most probable) case has a minimum of 6 bad positions to select from.
 
 ![All 6 spectrums](./assets/rgb_sorted_from_flower.JPG)
+
+An example mozaic generated using this technique is shown here:
+
+![RGB Sort Results](./assets/RGB_Sort_Results.JPG)
 
 To address the landscape ridge issues, other sorting alternatives were investigated. [This article](https://www.alanzucconi.com/2015/09/30/colour-sorting/) outlines the issues of sorting colors, and proposed various alternatives to the naive RGB-sort approach.
 
@@ -61,6 +67,11 @@ A key feature of this algorithm leverages the visually-appealing distribution of
 ![HSV Sorted Climber Start](./assets/HSV_Sorted_Climber_Start.JPG)
 
 With multiple starting positions, even with ridges, a reasonable image match is likely to be found. Analyzing the input image set HSV sorted colorspace prior to mozaic generation using this algorithm to select an appropriate climber count will typically yield the best results. A note on this subject is that the computation time will scale linearly with the number of climbers selected, thus selecting too many climbers will leave us in the same time-prohibitive state that the Brute Force Algorithm left us in. 
+
+Results from this technique is shown below:
+
+![HSV Sorted Climber Results](./assets/HSV_Sort_Results.JPG)
+
 
 ## How To Run
 

@@ -76,6 +76,30 @@ At around 25 climbers, we are able to generate reasonable results on ~3000 input
 
 ## Limitations and Future Considerations
 
+##### Limitation 1: Time
+
+Due to this being a single semester project, the scope needed to be limited to ensure all project requirements were met while implementing an acceptable amount of completed features. From a project management perspective, this was the most prohibitive limitation.
+
+###### Future Considerations
+
+If given more time for this project, I would add more features and host the application on Heroku.
+
+##### Limitation 2: Repetition in Mozaic
+
+Repetition in the final mozaic severely limits the appeal of the result. While repetition technically conforms to the optimal solution of minimum color distance, it is less visually appealing than if there were more variety.
+
+###### Future Considerations
+
+To resolve repetition in the final mozaic, there are multiple approaches that could be used: random selection from a color-distance heuristic solution set, random start positions for hill climbing, simulated annealing, local beam search, and stochastic beam search. The common factor in all of these approaches is leveraging stochasticism to expand the number of input images used in the final result. Further, these all have the benefit of producing different results for each run, allowing the user to select from multiple solutions with the same input.
+
+##### Limitation 3: Time Complexity
+
+Generally speaking, producing reasonable results is time-prohibitive. In a real-world application, this would be unacceptable.
+
+###### Future Considerations
+
+The server-side algorithms should be reviewed and optimized. Perhaps a grouping technique in colorspace could be used to limit searches further by avoiding obviosly different input images.
+
 ## How To Run
 
 sfsdffg

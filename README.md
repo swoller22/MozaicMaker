@@ -100,6 +100,14 @@ Generally speaking, producing reasonable results is time-prohibitive. In a real-
 
 The server-side algorithms should be reviewed and optimized. Perhaps a grouping technique in colorspace could be used to limit searches further by avoiding discernably unoptimal input images.
 
+##### Limitation 4: Image Preprocessing
+
+Image resizing creates unrecognizable results in some cases - particularly when the original image has a lot of detail and the scale down is too significant or when the shape of the original image is distant from a square.
+
+###### Future Considerations
+
+Image preprocessing could be optimized or identify issues with the input image set or large image prior to attempting to generate a mozaic.
+
 ## How To Run
 
 sfsdffg

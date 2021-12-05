@@ -18,7 +18,7 @@ The point of variation across the 3 algorithms is step 2, searching for the best
 
 ### Brute Force Search
 
-The Brute Force Search algorithm searches the entire input images set to find the minimum color distance. While this will always find the optimal solution, the time complexity is prohibitive as the number of blocks and input image set size increases. The algorithm runs in O(r*c*n) time where r is the number of rows of blocks, c is the number of columns of blocks, and n is the input image set size.
+The Brute Force Search algorithm searches the entire input image set to find the minimum color distance. While this will always find the optimal solution, the time complexity is prohibitive as the number of blocks and input image set size increases. The algorithm runs in O(r*c*n) time where r is the number of rows of blocks, c is the number of columns of blocks, and n is the input image set size.
 
 To address the time complexity concerns, 2 new algorithms were investigated and generated: Hill Climbing over an RGB-Sorted Colorspace and Hill Climbing over an HSV-Sorted Colorspace.
 

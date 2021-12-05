@@ -114,9 +114,9 @@ sfsdffg
 
 ## Design
 
-### Technology stack
+A Client-Server Architecture was used to adhere to the Separation of Concerns design principle which is critical in applications that entail of complex user interfaces and backend computation. A high-level view of the architectural design is shown below:
 
-### Top-Level Design
+![Top Level Design](./assets/Top_Level_Design.JPG)
 
 ### Client-Side Design
 
@@ -127,3 +127,5 @@ sfsdffg
 #### Database Design
 
 ### Security Considerations
+
+### Technology stack

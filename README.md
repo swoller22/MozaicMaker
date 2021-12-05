@@ -50,7 +50,7 @@ Sorting on RGB gives the following results:
 
 The authors results validate our own, that RGB sorting yields very poor results. The author then reviews the Hue, Saturation, Value space which is comprised of a more telling component of a color: Hue. Sorting on Hue first, Saturation second, and Value third yields the following results:
 
-![RGB sorted from web](./assets/hsv_sorted_from_web.JPG)
+![HSV sorted from web](./assets/hsv_sorted_from_web.JPG)
 
 This result was promising enough to explore in our project. Sorting on our example input image data yielded very strong results, and appeared to both lessen ridges and better distribute the colors in our landscape: 
 
@@ -58,7 +58,7 @@ This result was promising enough to explore in our project. Sorting on our examp
 
 A key feature of this algorithm leverages the visually-appealing distribution of this new spectrum. Users are able to enter the number of climbers whom are automatically distributed evenly throughout the landscape.
 
-![Flower Mozaic All](./assets/fromFlowerMozaic.JPG)
+![HSV Sorted Climber Start](./assets/HSV_Sorted_Climber_Start.JPG)
 
 
 ## Results

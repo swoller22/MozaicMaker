@@ -34,7 +34,7 @@ To increase the state-space landscape and probability for a meaningful and reaso
 
 // Insert image here for the 6 search spaces
 
-To address the landscape ridge issue, other sorting alternatives were investigated. This site was built using [this](https://www.alanzucconi.com/2015/09/30/colour-sorting/) article.
+To address the landscape ridge issue, other sorting alternatives were investigated. [this](https://www.alanzucconi.com/2015/09/30/colour-sorting/) article outlined the issues of sorting colors, and proposed various alternatives to the naive RGB-sort approach.
 
 ### Hill Climbing over an HSV-Sorted Colorspace
 

@@ -36,11 +36,21 @@ To increase the state-space landscape and probability for a meaningful and reaso
 
 ![All 6 spectrums](./assets/rgb_sorted_from_flower.JPG)
 
-To address the landscape ridge issues, other sorting alternatives were investigated. [this](https://www.alanzucconi.com/2015/09/30/colour-sorting/) article outlines the issues of sorting colors, and proposed various alternatives to the naive RGB-sort approach.
+To address the landscape ridge issues, other sorting alternatives were investigated. [This article](https://www.alanzucconi.com/2015/09/30/colour-sorting/) outlines the issues of sorting colors, and proposed various alternatives to the naive RGB-sort approach.
 
 ### Hill Climbing over an HSV-Sorted Colorspace
 
+Before delving into the Hill Climbing over an HSV-Sorted Colorspace algorithm, the justification for investigating this approach should be made apparent. From the [article](https://www.alanzucconi.com/2015/09/30/colour-sorting/) mentioned prior, the author laid out results of various sorting techniques. To give a short synopsis of the articles results, we begin with the following unsorted color spectrum:
 
+![Unsorted from web](./assets/unsorted_from_web.JPG)
+
+Sorting on RGB gives the following results:
+
+![RGB sorted from web](./assets/rgb_sorted_from_web.JPG)
+
+The authors results validated our own, that RGB sorting yields very poor results. The author then reviews the Hue, Saturation, Value spectrum which is comprised of likely more telling component of a color: Hue. Sorting on Hue first, Saturation second, and Value third yields the following results:
+
+![RGB sorted from web](./assets/hsv_sorted_from_web.JPG)
 
 ## How To Run
 

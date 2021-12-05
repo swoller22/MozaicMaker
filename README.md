@@ -20,7 +20,7 @@ The point of variation across the 3 algorithms is step 2, searching for the best
 
 The Brute Force Search algorithm searches the entire input image set to find the minimum color distance. While this will always find the optimal solution, the time complexity is prohibitive as the number of blocks and input image set size increases. The algorithm runs in *O*(*r*_c_*n*) time where *r* is the number of rows of blocks, *c* is the number of columns of blocks, and *n* is the input image set size.
 
-To address the time complexity concerns, 2 new algorithms were investigated and generated: Hill Climbing over an RGB-Sorted Colorspace and Hill Climbing over an HSV-Sorted Colorspace.
+To address the time complexity concerns, 2 new algorithms were investigated and generated: Hill Climbing over an RGB-Sorted Colorspace and Hill Climbing over an HSV-Sorted Colorspace. These algorithms both run in *O*(*r*_c_) time, due to restrictions on the search space as will be soon covered.
 
 ### Hill Climbing over an RGB-Sorted Colorspace
 
@@ -55,6 +55,11 @@ The authors results validate our own, that RGB sorting yields very poor results.
 This result was promising enough to explore in our project. Sorting on our example input image data yielded very strong results, and appeared to both lessen ridges and better distribute the colors in our landscape: 
 
 ![Flower Mozaic All](./assets/fromFlowerMozaic.JPG)
+
+A key feature of this algorithm leverages the visually-appealing distribution of this new spectrum. Users are able to enter the number of climbers whom are automatically distributed evenly throughout the landscape.
+
+![Flower Mozaic All](./assets/fromFlowerMozaic.JPG)
+
 
 ## Results
 

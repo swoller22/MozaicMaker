@@ -68,10 +68,13 @@ A key feature of this algorithm leverages the visually-appealing distribution of
 
 With multiple starting positions, even with ridges, a reasonable image match is likely to be found. Analyzing the input image set HSV sorted colorspace prior to mozaic generation using this algorithm to select an appropriate climber count will typically yield the best results. A note on this subject is that the computation time will scale linearly with the number of climbers selected, thus selecting too many climbers will leave us in the same time-prohibitive state that the Brute Force Algorithm left us in. 
 
-Results from this technique is shown below:
+Results from this technique are shown below:
 
 ![HSV Sorted Climber Results](./assets/HSV_Sort_Results.JPG)
 
+At around 25 climbers, we are able to generate reasonable results on ~3000 input images in a reasonable amount of time. Depending on the users own opinion, this may be an acceptable solution. Personally, for this example set, 200 climbers appears to be the optimal solution for speed and performance, where 500 climbers became time-prohibitive for a real world application.
+
+## Limitations and Future Considerations
 
 ## How To Run
 
@@ -92,5 +95,3 @@ sfsdffg
 #### Database Design
 
 ### Security Considerations
-
-## Limitations and Future Considerations

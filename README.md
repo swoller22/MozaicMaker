@@ -9,7 +9,6 @@ to recreate a mozaic of the large image. An example is shown below.
 
 ![Mozaic Demo](./assets/Mozaic_Descriptor.JPG)
 
-
 There are three mozaic creation algorithms currently implemented: Brute Force Search, Hill Climbing over an RGB-Sorted Colorspace, and Hill Climbing over an HSV-Sorted Colorspace. Each of these algorithms involve the following steps:
  1. Breaking the large image down into blocks based on the small image size
  2. Search through the input image set for the best match to each block, defined as having the minimum color distance to that block
@@ -35,7 +34,7 @@ However, using this approach yields a landscape with many ridges. This should be
 
 To increase the state-space landscape and probability for a meaningful and reasonable match, this algorithm was extended to not only sort on R then G then B but all 6 combinations of the components (RGB, RBG, GRB, GBR, BRG, BGR). A climber is positioned at the center of each landscape and attempts to climb to a best match. These 6 climbers results are then compared to find the absolute best match found and that result is used. The resulting mozaics of this enhancement were better than the single landscape and climber approach. This improvement was likely due to this algorithms ability to search 6 spaces so even though each space is non-optimal for climbing it was less likely to be placed in a ridge, or in the worst (and most probable) case has a minimum of 6 bad positions to select from.
 
-![All 6 spectrums](./assets/RGB_Sorted_Compare.JPG)
+![All 6 spectrums](./assets/rgb_sorted_from_flower.JPG)
 
 To address the landscape ridge issues, other sorting alternatives were investigated. [this](https://www.alanzucconi.com/2015/09/30/colour-sorting/) article outlines the issues of sorting colors, and proposed various alternatives to the naive RGB-sort approach.
 

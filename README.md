@@ -48,9 +48,15 @@ Sorting on RGB gives the following results:
 
 ![RGB sorted from web](./assets/rgb_sorted_from_web.JPG)
 
-The authors results validated our own, that RGB sorting yields very poor results. The author then reviews the Hue, Saturation, Value spectrum which is comprised of likely more telling component of a color: Hue. Sorting on Hue first, Saturation second, and Value third yields the following results:
+The authors results validate our own, that RGB sorting yields very poor results. The author then reviews the Hue, Saturation, Value space which is comprised of a more telling component of a color: Hue. Sorting on Hue first, Saturation second, and Value third yields the following results:
 
 ![RGB sorted from web](./assets/hsv_sorted_from_web.JPG)
+
+This result was promising enough to explore in our project. Sorting on our example input image data yielded very strong results, and appeared to both lessen ridges and better distribute the colors in our landscape: 
+
+![Flower Mozaic All](./assets/fromFlowerMozaic.JPG)
+
+## Results
 
 ## How To Run
 

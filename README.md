@@ -118,11 +118,13 @@ A Client-Server Architecture was used to adhere to the Separation of Concerns de
 
 ![Top Level Design](./assets/Top_Level_Design.JPG)
 
-### Client-Side Design
-
-#### User Experience
-
 ### Server-Side Design
+
+The server design is set up as follows:
+
+![Server Design](./assets/Server_Design.JPG)
+
+
 
 #### Database Design
 

@@ -60,8 +60,7 @@ A key feature of this algorithm leverages the visually-appealing distribution of
 
 ![HSV Sorted Climber Start](./assets/HSV_Sorted_Climber_Start.JPG)
 
-
-## Results
+With multiple starting positions, even with ridges, a reasonable image match is likely to be found. Analyzing the input image set HSV sorted colorspace prior to mozaic generation using this algorithm to select an appropriate climber count will typically yield the best results. A note on this subject is that the computation time will scale linearly with the number of climbers selected, thus selecting too many climbers will leave us in the same time-prohibitive state that the Brute Force Algorithm left us in. 
 
 ## How To Run
 

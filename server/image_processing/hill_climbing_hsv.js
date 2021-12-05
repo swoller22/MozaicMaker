@@ -110,7 +110,6 @@ function findBestMatch(blockAverage, smallImageHexs, climbDistance, numberOfClim
     for (let i = 0; i < numberOfClimbers; i++) {
 
         startIndeces.push(Math.floor(i * (smallImageHexs.length - 1) / (numberOfClimbers - 1)))
-        console.log(startIndeces[i])
     }
 
     /**

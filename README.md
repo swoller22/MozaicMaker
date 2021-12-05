@@ -98,7 +98,7 @@ Generally speaking, producing reasonable results is time-prohibitive. In a real-
 
 ###### Future Considerations
 
-The server-side algorithms should be reviewed and optimized. Perhaps a grouping technique in colorspace could be used to limit searches further by avoiding obviosly different input images.
+The server-side algorithms should be reviewed and optimized. Perhaps a grouping technique in colorspace could be used to limit searches further by avoiding discernably unoptimal input images.
 
 ## How To Run
 

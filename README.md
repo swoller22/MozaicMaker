@@ -52,7 +52,7 @@ The authors results validate our own, that RGB sorting yields very poor results.
 
 ![HSV sorted from web](./assets/hsv_sorted_from_web.JPG)
 
-This result was promising enough to explore in our project. Sorting on our example input image data yielded very strong results, and appeared to both lessen ridges and better distribute the colors in our landscape: 
+This result was promising enough to explore in our project. Sorting on our example input image data yields very strong results, and appeared to both lessen ridges and better distribute the colors in our landscape: 
 
 ![Flower Mozaic All](./assets/fromFlowerMozaic.JPG)
 

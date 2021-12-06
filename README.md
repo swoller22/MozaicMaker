@@ -124,10 +124,26 @@ The server design is set up as follows:
 
 ![Server Design](./assets/Server_Design.JPG)
 
-
-
-#### Database Design
-
-### Security Considerations
-
 ### Technology stack
+
+The following technologies/libraries were used for this project:
+
+| Technology/Library  | Version | Use Description |
+| ------------- | ------------- | ------------ |
+| Bootstrap  | 5.1.3  | Front-end design |
+| JQuery  | 1.12.3  | Front-end DOM traversal and manipulation |
+| Plotly  | 2.6.3  | Front-end plotting |
+| Lightbox  | 2.8.2  | Front-end image gallery view |
+| Axios  | N/A | HTTP client |
+| Express  | 4.17.1 | Back-end web application framework |
+| Mongoose  | 6.0.12 | Back-end mongodb library |
+| Passport  | 0.5.0 | Back-end authentication middleware library |
+| Multer  | 1.4.3 | Back-end multipart/form-data handling middleware library |
+| AWS-SDK | 2.1013.0 | Back-end AWS interface library |
+| Sharp | 0.29.2 | Back-end Node.js image processing library |
+
+For a full list of libraries used, see server/package.json and client imports.
+
+
+
+

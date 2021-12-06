@@ -110,7 +110,7 @@ Image preprocessing could be optimized or identify issues with the input image s
 
 ## How To Run
 
-sfsdffg
+TO COMPlETE
 
 ## Design
 

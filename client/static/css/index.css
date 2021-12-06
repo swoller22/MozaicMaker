@@ -92,6 +92,22 @@ img {
     display: none;
 }
 
-#sortedColorSpace {
+main #sortedColorSpace {
     height: 600px;
+}
+
+#submitButton:hover, #analyzeButton:hover {
+    background-color: #0d85fd;
+}
+
+body input:required {
+    border-color: #ced4da;
+}
+
+form .form-control:focus {
+    border-color: #82b3fd;
+}
+
+#largeImageWidth:out-of-range, #largeImageHeight:out-of-range {
+    border-color: #fd8282;
 }

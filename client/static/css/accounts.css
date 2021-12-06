@@ -10,6 +10,6 @@ div[id="bootstrap-override"] + form label[for="currentPassword"] {
     font-weight: bold;
 }
 
-h1+ div > #bootstrap-override-2 > button[id="deleteAccount"] {
+h1 + div > #bootstrap-override-2 > button[id="deleteAccount"] {
     font-weight: bold;
 }

@@ -8,7 +8,6 @@ $('.alert + form').on('submit', async (e) => {
 
     let username = $('#username').val()
     let password = $('#password').val()
-    console.log(`username: ${username} password: ${password}`)
     axios.defaults.withCredentials = true
     const result = await axios.post('http://localhost:5000/authentication/register', {
         username: username,

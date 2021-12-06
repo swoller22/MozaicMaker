@@ -1,3 +1,15 @@
 #passwordChangeForm > * {
     margin: 20px
 }
+
+div[id="bootstrap-override"] + form label[for="currentPassword"] {
+    font-weight: bold;
+}
+
+.row ~ .align-items-center label::first-line{
+    font-weight: bold;
+}
+
+h1+ div > #bootstrap-override-2 > button[id="deleteAccount"] {
+    font-weight: bold;
+}

@@ -3,7 +3,7 @@ $(document).ready(() => {
     $(".alert").hide()
 })
 
-$('#register-form').on('submit', async (e) => {
+$('.alert + form').on('submit', async (e) => {
     e.preventDefault()
 
     let username = $('#username').val()

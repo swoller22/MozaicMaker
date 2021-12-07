@@ -121,7 +121,7 @@ function findBestMatch(blockAverage, smallImageHexs, climbDistance, numberOfClim
      * @param climbDistance Maximum climb distance
      * @returns                 Hill climber object
      */
-    function generateHillClimber(name, sortedData, startIndex, climbDistance) {
+    let generateHillClimber = function (name, sortedData, startIndex, climbDistance) {
 
         let distance = cd.compare(blockAverage.hex, sortedData[startIndex])
         return {

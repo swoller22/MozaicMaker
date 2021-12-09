@@ -124,8 +124,9 @@ If available from the author, copy and paste the .env file which was submitted w
 
 #### Step 2: Starting the node server
 
+2. Navigate to the /MozaicMaker/server/ folder
 1. Run `npm install` to generate /node_modules/ dependencies
-2. Navigate to the /MozaicMaker/server/ folder and run 'node app.js'
+2. Run 'node app.js'
 
 #### Step 3: Running the client on localhost
 

@@ -127,11 +127,13 @@ If available from the author, copy and paste the .env file which was submitted w
 2. Navigate to the /MozaicMaker/server/ folder
 1. Run `npm install` to generate /node_modules/ dependencies
 2. Run 'node app.js'
+3. The server is now running on Port 5000
 
 #### Step 3: Running the client on localhost
 
 1. Configure a Web Server to point to /MoziacMaker/client/
 2. Launch Web Server in Google Chrome (website untested on other platforms)
+3. The MozaicMaker Log In page should be displayed
 
 ## Design
 

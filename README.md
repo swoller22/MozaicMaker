@@ -124,10 +124,10 @@ If available from the author, copy and paste the .env file which was submitted w
 
 #### Step 2: Starting the node server
 
-2. Navigate to the /MozaicMaker/server/ folder
-1. Run `npm install` to generate /node_modules/ dependencies
-2. Run 'node app.js'
-3. The server is now running on Port 5000
+1. In a terminal with npm installed, navigate to the /MozaicMaker/server/ folder
+2. Run `npm install` to generate /node_modules/ dependencies
+3. Run 'node app.js'
+4. The server is now running on Port 5000
 
 #### Step 3: Running the client on localhost
 

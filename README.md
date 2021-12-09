@@ -1,4 +1,4 @@
-GITHUB: https://github.com/swoller22/MozaicMaker/
+https://github.com/swoller22/MozaicMaker/
 
 # MozaicMaker
 

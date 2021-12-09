@@ -1,5 +1,4 @@
 {
-    "uri": "mongodb+srv://generalUser:generalUser@cluster0.cgdqj.mongodb.net/myFirstDatabase?retryWrites=true&w=majority",
     "imagesDB": "images",
     "accountsDB": "accounts"
 }

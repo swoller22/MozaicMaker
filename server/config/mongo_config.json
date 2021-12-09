@@ -1,6 +1,5 @@
 {
-    "host": "localhost",
-    "port": 27017,
+    "uri": "mongodb+srv://generalUser:generalUser@cluster0.cgdqj.mongodb.net/myFirstDatabase?retryWrites=true&w=majority",
     "imagesDB": "images",
     "accountsDB": "accounts"
 }

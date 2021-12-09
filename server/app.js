@@ -40,4 +40,4 @@ app.listen(process.env.PORT, () => console.log(`listening on port ${process.env.
 // Open Mongo connection
 const dbConfig = 
      JSON.parse(await readFile(new URL('./config/mongo_config.json', import.meta.url)))
-mongoose.connect(`mongodb://${dbConfig.host}:${dbConfig.port}/`)
+mongoose.connect(`${dbConfig.uri}`)

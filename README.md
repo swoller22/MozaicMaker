@@ -1,3 +1,5 @@
+GITHUB: https://github.com/swoller22/MozaicMaker/
+
 # MozaicMaker
 
 This full-stack project was developed by Stephen Woller for BU MET 602: Server-side Development and BU MET 664: Artificial Intelligence in the Fall 2021 Semester.
@@ -110,7 +112,25 @@ Image preprocessing could be optimized or identify issues with the input image s
 
 ## How To Run
 
-TO COMPlETE
+Due to the application not being fully hosted on the cloud, additional setup is required to run. The steps include: Set up AWS S3 bucket and MongoDB Atlas access, starting the node server, and running the client on localhost
+
+#### Step 0: Initial Download
+
+Download zip of this Github Directory and unzip into desired directory.
+
+#### Step 1: Set up AWS S3 bucket and MongoDB Atlas access
+
+If available from the author, copy and paste the .env file which was submitted with this assignment into the MozaicMaker/server/ folder
+
+#### Step 2: Starting the node server
+
+1. Run `npm install` to generate /node_modules/ dependencies
+2. Navigate to the /MozaicMaker/server/ folder and run 'node app.js'
+
+#### Step 3: Running the client on localhost
+
+1. Configure a Web Server to point to /MoziacMaker/client/
+2. Launch Web Server in Google Chrome (website untested on other platforms)
 
 ## Design
 

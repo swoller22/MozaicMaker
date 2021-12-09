@@ -118,18 +118,14 @@ Due to the application not being fully hosted on the cloud, additional setup is 
 
 Download zip of this Github Directory and unzip into desired directory.
 
-#### Step 1: Set up AWS S3 bucket and MongoDB Atlas access
-
-If available from the author, copy and paste the .env file which was submitted with this assignment into the MozaicMaker/server/ folder
-
-#### Step 2: Starting the node server
+#### Step 1: Starting the node server
 
 1. In a terminal with npm installed, navigate to the /MozaicMaker/server/ folder
 2. Run `npm install` to generate /node_modules/ dependencies
 3. Run 'node app.js'
 4. The server is now running on Port 5000
 
-#### Step 3: Running the client on localhost
+#### Step 2: Running the client on localhost
 
 1. Configure a Web Server to point to /MoziacMaker/client/
 2. Launch Web Server in Google Chrome (website untested on other platforms)

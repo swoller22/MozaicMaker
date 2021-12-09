@@ -37,7 +37,5 @@ app.use('/authentication', authentication_router)
 
 app.listen(process.env.PORT, () => console.log(`listening on port ${process.env.PORT}`))
 
-// Open Mongo connection
-const dbConfig = 
-     JSON.parse(await readFile(new URL('./config/mongo_config.json', import.meta.url)))
-mongoose.connect(`${dbConfig.uri}`)
+// Open Mongo connection. Note: using process.env instead of mongo_config due to security concerns with github
+mongoose.connect(`${process.env.MONGODB_URI}`)
